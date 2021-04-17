@@ -9,13 +9,20 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     var goalYellow: SKSpriteNode!
     var goalPurple: SKSpriteNode!
     let backgroud = SKSpriteNode(imageNamed: "background")
-    let stroke = SKSpriteNode(imageNamed: "stroke")
+    var timeBarStroke: SKShapeNode!
+    var goalStrokeBlue: SKShapeNode!
+    var goalStrokeYellow: SKShapeNode!
+    var goalStrokePurple: SKShapeNode!
+    var timeBar: SKSpriteNode!
+    var teste: CGFloat = 0
+
 
     public override func sceneDidLoad() {
         let xBlue = UIColor(red: 33/255, green: 217/255, blue: 237/255, alpha: 1.0)
         let xPurple = UIColor(red: 119/255, green: 115/255, blue: 234/255, alpha: 1.0)
         let xYellow = UIColor(red: 255/255, green: 184/255, blue: 8/255, alpha: 1.0)
         colors = [xBlue, xPurple, xYellow]
+        
     }
     
     func makeBall(at position: CGPoint, color: Int) {
@@ -24,7 +31,14 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.strokeColor = UIColor.black
         ball.position = position
         ball.zPosition = 11
+        ball.lineWidth = 2
         ball.name = "color-\(color)-ball"
+        self.addChild(ball)
+        balls.append(ball)
+        setupPhysics(ball: ball)
+    }
+    
+    func setupPhysics(ball: SKShapeNode){
         ball.physicsBody = SKPhysicsBody(circleOfRadius: 20)
         ball.physicsBody?.isDynamic = true
         ball.physicsBody?.affectedByGravity = false
@@ -33,13 +47,11 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.collisionBitMask = 2
         ball.physicsBody?.mass = 2
         ball.physicsBody?.contactTestBitMask = ball.physicsBody!.collisionBitMask
-        self.addChild(ball)
-        balls.append(ball)
-        
         ball.physicsBody?.applyImpulse(.init(dx: 1000, dy: 1000))
     }
 
     override public func didMove(to view: SKView) {
+        
         physicsWorld.contactDelegate = self
         
         backgroud.position.x = self.frame.midX
@@ -47,15 +59,9 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroud.setScale(0.35)
 
         addChild(backgroud)
-        
-        stroke.position.x = self.frame.midX
-        stroke.position.y = self.frame.midY
-        stroke.setScale(1)
-
-        addChild(stroke)
+    
         
         let xRed = UIColor(red: 231/255, green: 95/255, blue: 93/255, alpha: 1.0)
-        var timeBar: SKSpriteNode!
         timeBar = SKSpriteNode(color: xRed, size: .init(width: self.size.width, height: 30))
         timeBar.position = CGPoint(x: self.size.width / -2, y: self.size.height / 2)
         timeBar.anchorPoint = .init(x: 0, y: 0.5)
@@ -66,8 +72,8 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         timeBar.run(.repeat(.sequence([
             .run {
                 let increase: CGFloat = CGFloat(self.size.width) / CGFloat(maxTime)
-                timeBar.size = CGSize(width: timeBar.size.width - increase, height: timeBar.size.height)
-                if timeBar.size.width <= 9.50 {
+                self.timeBar.size = CGSize(width: self.timeBar.size.width - increase, height: self.timeBar.size.height)
+                if self.timeBar.size.width <= 9.50 {
                     let winScene = WinScene(fileNamed: "WinScene")!
 //                    let winScene = SKSpriteNode(imageNamed: "winScene")
 //                    winScene.zPosition = 12
@@ -83,7 +89,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ]), count: maxTime))
         
 
-        goalBlue = SKSpriteNode(color: colors[0], size: .init(width: 210, height: 336))
+        goalBlue = SKSpriteNode(color: colors[0], size: .init(width: 210, height: 365))
         goalBlue.position = CGPoint(x: -210, y:-85)
         goalBlue.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointBlue = CGPoint(x: goalBlue.size.width / 2 - (goalBlue.size.width * goalBlue.anchorPoint.x), y:goalBlue.size.height / 2 - (goalBlue.size.height * goalBlue.anchorPoint.y))
@@ -108,7 +114,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
             .wait(forDuration: 1)
         ])))
         
-        goalPurple = SKSpriteNode(color: colors[1], size: .init(width: 210, height: 336))
+        goalPurple = SKSpriteNode(color: colors[1], size: .init(width: 210, height: 365))
         goalPurple.position = CGPoint(x: 0, y:-85)
         goalPurple.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointPurple = CGPoint(x: goalPurple.size.width / 2 - (goalPurple.size.width * goalPurple.anchorPoint.x), y:goalPurple.size.height / 2 - (goalPurple.size.height * goalPurple.anchorPoint.y))
@@ -136,7 +142,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ])))
     
         
-        goalYellow = SKSpriteNode(color: colors[2], size: .init(width: 210, height: 336))
+        goalYellow = SKSpriteNode(color: colors[2], size: .init(width: 210, height: 365))
         goalYellow.position = CGPoint(x: 210, y:-85)
         goalYellow.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointYellow = CGPoint(x: goalYellow.size.width / 2 - (goalYellow.size.width * goalYellow.anchorPoint.x), y:goalYellow.size.height / 2 - (goalYellow.size.height * goalYellow.anchorPoint.y))
@@ -161,6 +167,37 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
             },
             .wait(forDuration: 1)
         ])))
+        
+        goalStrokeBlue = SKShapeNode(rect: goalBlue.frame)
+        goalStrokeBlue.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        goalStrokeBlue.lineWidth = 2
+        goalStrokeBlue.zPosition = 4
+        goalStrokeBlue.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        goalStrokeBlue.name = "color-0-goal"
+        addChild(goalStrokeBlue)
+        
+        goalStrokeYellow = SKShapeNode(rect: goalYellow.frame)
+        goalStrokeYellow.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        goalStrokeYellow.lineWidth = 2
+        goalStrokeYellow.zPosition = 4
+        goalStrokeYellow.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        goalStrokeYellow.name = "color-2-goal"
+        addChild(goalStrokeYellow)
+        
+        goalStrokePurple = SKShapeNode(rect: goalPurple.frame)
+        goalStrokePurple.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        goalStrokePurple.lineWidth = 2
+        goalStrokePurple.zPosition = 4
+        goalStrokePurple.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        goalStrokePurple.name = "color-1-goal"
+        addChild(goalStrokePurple)
+        
+        timeBarStroke = SKShapeNode(rect: timeBar.frame)
+        timeBarStroke.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        timeBarStroke.lineWidth = 2
+        timeBarStroke.zPosition = 4
+        timeBarStroke.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        addChild(timeBarStroke)
             
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
@@ -181,7 +218,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
                      ceiling.name = "ceiling"
                      ceiling.physicsBody = ceilingBody
                      ceiling.physicsBody?.contactTestBitMask = 2
-                     ceilingBody.isDynamic = true
+                     ceilingBody.isDynamic = false
                      ceilingBody.pinned = true
                      ceilingBody.allowsRotation = false
                      ceilingBody.contactTestBitMask = ceilingBody.collisionBitMask
@@ -203,7 +240,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         for ball in balls{
               if ball.contains(pos){
                   selectedBall = ball
-                  ball.physicsBody?.isDynamic = false
+                  ball.physicsBody = nil
               }
           }
     }
@@ -216,8 +253,15 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func touchUp(atPoint pos : CGPoint) {
         if selectedBall != nil{
-            selectedBall.physicsBody?.isDynamic = true
-            selectedBall.physicsBody?.applyImpulse(.init(dx: 600, dy: 600))
+            setupPhysics(ball: selectedBall)
+            if goalStrokeBlue.contains(pos){
+                collisionBetween(ball: selectedBall, object: goalStrokeBlue, selectedBall: selectedBall)
+            } else if goalStrokeYellow.contains(pos){
+                collisionBetween(ball: selectedBall, object: goalStrokeYellow, selectedBall: selectedBall)
+            } else if goalStrokePurple.contains(pos){
+                collisionBetween(ball: selectedBall, object: goalStrokePurple, selectedBall: selectedBall)
+            }
+            selectedBall = nil
         }
     }
 
@@ -237,7 +281,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         for t in touches { touchUp(atPoint: t.location(in: self)) }
     }
     
-    func collisionBetween(ball: SKNode, object: SKNode, selectedBall: SKShapeNode) {
+    func collisionBetween(ball: SKNode, object: SKShapeNode, selectedBall: SKShapeNode) {
         let separationObject: [String] = (object.name?.components(separatedBy: "-"))!
         let colorNumberObject: String = separationObject[1]
         let separationBall: [String] = (ball.name?.components(separatedBy: "-"))!
@@ -252,20 +296,22 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
                 balls.remove(at: index)
             }
             if colorNumberBall == "0"{
-                moviment(goal: goalBlue, valor: 40)
-                moviment(goal: goalYellow, valor: 5)
+                moviment(goal: goalBlue, valor: 30)
+                moviment(goal: goalYellow, valor: 0)
                 moviment(goal: goalPurple, valor: -10)
             }
             if colorNumberBall == "1"{
-                moviment(goal: goalBlue, valor: -30)
-                moviment(goal: goalYellow, valor: -45)
+                moviment(goal: goalBlue, valor: -10)
+                moviment(goal: goalYellow, valor: -40)
                 moviment(goal: goalPurple, valor: 30)
             }
             if colorNumberBall == "2"{
-                moviment(goal: goalBlue, valor: -45)
+                moviment(goal: goalBlue, valor: -40)
                 moviment(goal: goalYellow, valor: 30)
-                moviment(goal: goalPurple, valor: -50)
+                moviment(goal: goalPurple, valor: -40)
             }
+        } else {
+            ball.position = CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300))
         }
 
     }
@@ -283,29 +329,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
-        if self.selectedBall == nil {
-            return
-        }
-        
-        let isColor: Bool = contact.bodyA.node?.name?.starts(with: "color-") == true && contact.bodyB.node?.name?.starts(with: "color-") == true
-        let isBallAndGoal: Bool = (contact.bodyA.node?.name?.hasSuffix("ball") == true && contact.bodyB.node?.name?.hasSuffix("goal") == true) || (contact.bodyA.node?.name?.hasSuffix("goal") == true && contact.bodyB.node?.name?.hasSuffix("ball") == true)
-        if isColor && isBallAndGoal {
-            var ball: SKNode!
-            var goal: SKNode!
-            if contact.bodyA.node?.name?.hasSuffix("ball") == true {
-                ball = contact.bodyA.node
-                goal = contact.bodyB.node
-            } else {
-                ball = contact.bodyB.node
-                goal = contact.bodyA.node
-            }
-            if ball != self.selectedBall {
-                self.selectedBall = nil
-                return
-            }
-            collisionBetween(ball: ball, object: goal, selectedBall: self.selectedBall)
-            self.selectedBall = nil
-        }
+
     }
 }
 
