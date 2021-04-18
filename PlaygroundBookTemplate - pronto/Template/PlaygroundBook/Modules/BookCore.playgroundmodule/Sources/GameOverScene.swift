@@ -7,8 +7,8 @@ public class GameOverScene: SKScene {
     var tryAgainButtom = SKSpriteNode(imageNamed: "blueButtom")
     
     override public func didMove(to view: SKView) {
-        tryAgainButtom.position = CGPoint(x: 0, y: -244.649)
-        tryAgainButtom.size = CGSize(width: 283.022, height: 100.768)
+        tryAgainButtom.position = CGPoint(x: -0.361, y: -216.162)
+        tryAgainButtom.size = CGSize(width: 268.094, height: 100.468)
         addChild(tryAgainButtom)
     }
     func touchDown(atPoint pos : CGPoint) {

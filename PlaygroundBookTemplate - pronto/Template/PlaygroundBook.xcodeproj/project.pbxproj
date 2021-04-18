@@ -24,6 +24,7 @@
 		5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2F97E2054B6E400191409 /* ManifestPlist.strings */; };
 		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
+		901A181E262BAB5400870A52 /* preview.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 901A181D262BAB5400870A52 /* preview.jpg */; };
 		90306B6E26292F0100E27634 /* InitialScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 90306B6D26292F0100E27634 /* InitialScene.sks */; };
 		9068B5A32629FDD500969320 /* WinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068B5A22629FDD500969320 /* WinScene.swift */; };
 		9068B5A82629FE1000969320 /* WinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9068B5A72629FE1000969320 /* WinScene.sks */; };
@@ -151,6 +152,7 @@
 		5EF2F9AB2054BBF300191409 /* libBookCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBookCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
+		901A181D262BAB5400870A52 /* preview.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = preview.jpg; sourceTree = "<group>"; };
 		90306B6D26292F0100E27634 /* InitialScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InitialScene.sks; sourceTree = "<group>"; };
 		9068B5A22629FDD500969320 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
 		9068B5A72629FE1000969320 /* WinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WinScene.sks; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				901A181D262BAB5400870A52 /* preview.jpg */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				447A265A2600305100C533BC /* GameScene.sks */,
 				90306B6D26292F0100E27634 /* InitialScene.sks */,
@@ -495,6 +498,7 @@
 				447A265B2600305100C533BC /* GameScene.sks in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
+				901A181E262BAB5400870A52 /* preview.jpg in Resources */,
 				9068B5A82629FE1000969320 /* WinScene.sks in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 				90306B6E26292F0100E27634 /* InitialScene.sks in Resources */,

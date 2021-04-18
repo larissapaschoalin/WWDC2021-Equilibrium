@@ -31,7 +31,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.strokeColor = UIColor.black
         ball.position = position
         ball.zPosition = 11
-        ball.lineWidth = 2
+        ball.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         ball.name = "color-\(color)-ball"
         self.addChild(ball)
         balls.append(ball)
@@ -65,6 +65,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         timeBar = SKSpriteNode(color: xRed, size: .init(width: self.size.width, height: 30))
         timeBar.position = CGPoint(x: self.size.width / -2, y: self.size.height / 2)
         timeBar.anchorPoint = .init(x: 0, y: 0.5)
+        timeBar.zPosition = 2
         addChild(timeBar)
     
         
@@ -75,14 +76,15 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.timeBar.size = CGSize(width: self.timeBar.size.width - increase, height: self.timeBar.size.height)
                 if self.timeBar.size.width <= 9.50 {
                     let winScene = WinScene(fileNamed: "WinScene")!
-//                    let winScene = SKSpriteNode(imageNamed: "winScene")
-//                    winScene.zPosition = 12
-//                    winScene.position.x = self.frame.midX
-//                    winScene.position.y = self.frame.midY
-//                    winScene.alpha = 0
-//                    let fadeIn = SKAction.fadeIn(withDuration: 1)
-//                    winScene.run(fadeIn)
+                    winScene.scaleMode = .aspectFit
                     self.view?.presentScene(winScene)
+                    //                    let winScene = SKSpriteNode(imageNamed: "winScene")
+                    //                    winScene.zPosition = 12
+                    //                    winScene.position.x = self.frame.midX
+                    //                    winScene.position.y = self.frame.midY
+                    //                    winScene.alpha = 0
+                    //                    let fadeIn = SKAction.fadeIn(withDuration: 1)
+                    //                    winScene.run(fadeIn)
                 }
             },
             .wait(forDuration: 1)
@@ -99,7 +101,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         goalBlue.zPosition = 3
         addChild(goalBlue)
         
-        let maxSize = 50
+        let maxSize = 30
         goalBlue.run(.repeatForever(.sequence([
             .run {
                 let increase: CGFloat = CGFloat(self.goalBlue.size.width) / CGFloat(maxSize)
@@ -169,46 +171,43 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ])))
         
         goalStrokeBlue = SKShapeNode(rect: goalBlue.frame)
-        goalStrokeBlue.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        goalStrokeBlue.lineWidth = 2
-        goalStrokeBlue.zPosition = 4
+        goalStrokeBlue.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokeBlue.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokeBlue.name = "color-0-goal"
         addChild(goalStrokeBlue)
         
         goalStrokeYellow = SKShapeNode(rect: goalYellow.frame)
-        goalStrokeYellow.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        goalStrokeYellow.lineWidth = 2
-        goalStrokeYellow.zPosition = 4
+        goalStrokeYellow.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokeYellow.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokeYellow.name = "color-2-goal"
         addChild(goalStrokeYellow)
         
         goalStrokePurple = SKShapeNode(rect: goalPurple.frame)
-        goalStrokePurple.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        goalStrokePurple.lineWidth = 2
-        goalStrokePurple.zPosition = 4
+        goalStrokePurple.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokePurple.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         goalStrokePurple.name = "color-1-goal"
         addChild(goalStrokePurple)
         
         timeBarStroke = SKShapeNode(rect: timeBar.frame)
-        timeBarStroke.strokeColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        timeBarStroke.lineWidth = 2
-        timeBarStroke.zPosition = 4
-        timeBarStroke.fillColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        timeBarStroke.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+        timeBarStroke.fillColor = #colorLiteral(red: 0.9293201566, green: 0.9294758439, blue: 0.9292996526, alpha: 1)
+        timeBarStroke.zPosition = 1
         addChild(timeBarStroke)
             
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
         
         var colorIndex = 0
-        for _ in 1...9 {
+        for _ in 1...6 {
             if colorIndex > self.colors.count - 1 {
                 colorIndex = 0
             }
             makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: colorIndex)
             colorIndex += 1
         }
+        makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
+        makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
+        makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
+        makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
 
 
         let ceiling = SKNode()
