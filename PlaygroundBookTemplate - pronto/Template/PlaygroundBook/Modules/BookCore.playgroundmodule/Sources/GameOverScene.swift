@@ -7,6 +7,12 @@ public class GameOverScene: SKScene {
     var tryAgainButtom = SKSpriteNode(imageNamed: "blueButtom")
     
     override public func didMove(to view: SKView) {
+        gameOver?.alpha = 0
+        tryAgainButtom.alpha = 0
+        let fadeIn = SKAction.fadeIn(withDuration: 0.5)
+        gameOver?.run(fadeIn)
+        tryAgainButtom.run(fadeIn)
+        
         tryAgainButtom.position = CGPoint(x: -0.361, y: -216.162)
         tryAgainButtom.size = CGSize(width: 268.094, height: 100.468)
         addChild(tryAgainButtom)

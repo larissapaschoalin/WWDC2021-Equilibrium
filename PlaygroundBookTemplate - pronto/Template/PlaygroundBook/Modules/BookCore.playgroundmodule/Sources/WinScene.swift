@@ -1,13 +1,39 @@
 import Foundation
 import SpriteKit
+import AVFoundation
 
 public class WinScene: SKScene {
     lazy var winScene = childNode(withName: "winScene") as? SKSpriteNode
     var playAgainButtom = SKSpriteNode(imageNamed: "yellowButtom")
     
+    public func playMusicButtom() {
+    var audioPlayer: AVAudioPlayer?
+    if let audioURL = Bundle.main.url(forResource: "botao", withExtension: "m4a") {
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: audioURL) /// make the audio player
+            audioPlayer?.numberOfLoops = 0
+            
+        } catch {
+            print("Couldn't play audio. Error: (error)")
+        }
+        
+    } else {
+        print("No audio file found")
+    }
+}
+
+    
     override public func didMove(to view: SKView) {
+        
+        winScene?.alpha = 0
+        playAgainButtom.alpha = 0
+        let fadeIn = SKAction.fadeIn(withDuration: 0.5)
+        winScene?.run(fadeIn)
+        playAgainButtom.run(fadeIn)
+        
         playAgainButtom.position = CGPoint(x: 1.442, y: -315.268)
         playAgainButtom.size = CGSize(width: 268.094, height: 100.468)
+  
         addChild(playAgainButtom)
     }
     
@@ -16,6 +42,7 @@ public class WinScene: SKScene {
             let scene = GameScene(fileNamed: "GameScene")!
             scene.scaleMode = .aspectFit
             self.view?.presentScene(scene)
+            playMusicButtom() 
         }
     }
 

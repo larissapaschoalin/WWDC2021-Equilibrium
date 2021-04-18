@@ -6,10 +6,29 @@
 //
 import SpriteKit
 import Foundation
+import AVFoundation
 
 public class InitialScene: SKScene {
     lazy var background = childNode(withName: "initialScene") as? SKSpriteNode
     var startButtom = SKSpriteNode(imageNamed: "purpleButtom")
+    
+    public func playMusicButtom() {
+    var audioPlayer: AVAudioPlayer?
+    if let audioURL = Bundle.main.url(forResource: "botao", withExtension: "m4a") {
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOf: audioURL)
+            audioPlayer?.numberOfLoops = 0
+            audioPlayer?.play()
+            
+        } catch {
+            print("Couldn't play audio. Error: (error)")
+        }
+        
+    } else {
+        print("No audio file found")
+    }
+        
+}
     
     override public func didMove(to view: SKView) {
         startButtom.position = CGPoint(x: -0.361, y: -216.162)
@@ -22,6 +41,7 @@ public class InitialScene: SKScene {
             let scene = GameScene(fileNamed: "GameScene")!
             scene.scaleMode = .aspectFit
             self.view?.presentScene(scene)
+            playMusicButtom()
         }
     }
 

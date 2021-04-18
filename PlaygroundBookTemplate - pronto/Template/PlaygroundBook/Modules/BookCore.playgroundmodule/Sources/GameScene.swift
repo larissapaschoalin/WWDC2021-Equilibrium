@@ -15,6 +15,19 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     var goalStrokePurple: SKShapeNode!
     var timeBar: SKSpriteNode!
     var teste: CGFloat = 0
+    var lastTime: TimeInterval = 0
+    var speedGoal: CGFloat = 10
+    var speedIncrease: CGFloat = 150
+    var speedDecreaseFast: CGFloat = 250
+    var goalBlueDecreasing = true
+    var goalYellowDecreasing = true
+    var goalPurpleDecreasing = true
+    var timeBlue: TimeInterval = 0
+    var timeYellow: TimeInterval = 0
+    var timePurple: TimeInterval = 0
+    var goalBlueFastDecrease = false
+    var goalYellowFastDecrease = false
+    var goalPurpleFastDecrease = false
 
 
     public override func sceneDidLoad() {
@@ -22,7 +35,6 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         let xPurple = UIColor(red: 119/255, green: 115/255, blue: 234/255, alpha: 1.0)
         let xYellow = UIColor(red: 255/255, green: 184/255, blue: 8/255, alpha: 1.0)
         colors = [xBlue, xPurple, xYellow]
-        
     }
     
     func makeBall(at position: CGPoint, color: Int) {
@@ -48,7 +60,9 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.mass = 2
         ball.physicsBody?.contactTestBitMask = ball.physicsBody!.collisionBitMask
         ball.physicsBody?.applyImpulse(.init(dx: 1000, dy: 1000))
+    
     }
+    
 
     override public func didMove(to view: SKView) {
         
@@ -67,29 +81,13 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         timeBar.anchorPoint = .init(x: 0, y: 0.5)
         timeBar.zPosition = 2
         addChild(timeBar)
-    
         
-        let maxTime = 60
-        timeBar.run(.repeat(.sequence([
-            .run {
-                let increase: CGFloat = CGFloat(self.size.width) / CGFloat(maxTime)
-                self.timeBar.size = CGSize(width: self.timeBar.size.width - increase, height: self.timeBar.size.height)
-                if self.timeBar.size.width <= 9.50 {
-                    let winScene = WinScene(fileNamed: "WinScene")!
-                    winScene.scaleMode = .aspectFit
-                    self.view?.presentScene(winScene)
-                    //                    let winScene = SKSpriteNode(imageNamed: "winScene")
-                    //                    winScene.zPosition = 12
-                    //                    winScene.position.x = self.frame.midX
-                    //                    winScene.position.y = self.frame.midY
-                    //                    winScene.alpha = 0
-                    //                    let fadeIn = SKAction.fadeIn(withDuration: 1)
-                    //                    winScene.run(fadeIn)
-                }
-            },
-            .wait(forDuration: 1)
-        ]), count: maxTime))
-        
+        timeBar.run(.scaleX(to: 0, duration: 60)){
+            let winScene = WinScene(fileNamed: "WinScene")!
+            winScene.scaleMode = .aspectFit
+            self.view?.presentScene(winScene)
+        }
+
 
         goalBlue = SKSpriteNode(color: colors[0], size: .init(width: 210, height: 365))
         goalBlue.position = CGPoint(x: -210, y:-85)
@@ -101,21 +99,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         goalBlue.zPosition = 3
         addChild(goalBlue)
         
-        let maxSize = 30
-        goalBlue.run(.repeatForever(.sequence([
-            .run {
-                let increase: CGFloat = CGFloat(self.goalBlue.size.width) / CGFloat(maxSize)
-                self.goalBlue.size = CGSize(width: 210, height: self.goalBlue.size.height - increase)
-                if self.goalBlue.size.height <= 2 {
-                    let gameOverScene = GameOverScene(fileNamed: "GameOverScene")!
-                    gameOverScene.scaleMode = .aspectFit
-                    self.view?.presentScene(gameOverScene)
-                    self.goalBlue.removeAllActions()
-                }
-            },
-            .wait(forDuration: 1)
-        ])))
-        
+
         goalPurple = SKSpriteNode(color: colors[1], size: .init(width: 210, height: 365))
         goalPurple.position = CGPoint(x: 0, y:-85)
         goalPurple.anchorPoint = .init(x: 0.5, y: 1)
@@ -128,21 +112,6 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         goalPurple.zPosition = 3
         addChild(goalPurple)
         
-
-        goalPurple.run(.repeatForever(.sequence([
-            .run {
-                let increase: CGFloat = CGFloat(self.goalPurple.size.width) / CGFloat(maxSize)
-                self.goalPurple.size = CGSize(width: 210, height: self.goalPurple.size.height - increase)
-                if self.goalPurple.size.height <= 2 {
-                    let gameOverScene = GameOverScene(fileNamed: "GameOverScene")!
-                    gameOverScene.scaleMode = .aspectFit
-                    self.view?.presentScene(gameOverScene)
-                    self.goalPurple.removeAllActions()
-                }
-            },
-            .wait(forDuration: 1)
-        ])))
-    
         
         goalYellow = SKSpriteNode(color: colors[2], size: .init(width: 210, height: 365))
         goalYellow.position = CGPoint(x: 210, y:-85)
@@ -154,21 +123,6 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         goalYellow.zPosition = 3
         addChild(goalYellow)
         
-
-        goalYellow.run(.repeatForever(.sequence([
-            .run {
-                let increase: CGFloat = CGFloat(self.goalYellow.size.width) / CGFloat(maxSize)
-                self.goalYellow.size = CGSize(width: 210, height: self.goalYellow.size.height - increase)
-                if self.goalYellow.size.height <= 2 {
-                    let gameOverScene = GameOverScene(fileNamed: "GameOverScene")!
-                    gameOverScene.scaleMode = .aspectFit
-                    self.view?.presentScene(gameOverScene)
-                    self.goalBlue.removeAllActions()
-                    self.goalYellow.removeAllActions()
-                }
-            },
-            .wait(forDuration: 1)
-        ])))
         
         goalStrokeBlue = SKShapeNode(rect: goalBlue.frame)
         goalStrokeBlue.strokeColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
@@ -204,6 +158,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
             makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: colorIndex)
             colorIndex += 1
         }
+        makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
         makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
         makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
         makeBall(at: CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300)), color: 2)
@@ -295,19 +250,19 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
                 balls.remove(at: index)
             }
             if colorNumberBall == "0"{
-                moviment(goal: goalBlue, valor: 30)
-                moviment(goal: goalYellow, valor: 0)
-                moviment(goal: goalPurple, valor: -10)
+                goalBlueDecreasing = false
+                goalYellowFastDecrease = true
+                goalPurpleFastDecrease = true
             }
             if colorNumberBall == "1"{
-                moviment(goal: goalBlue, valor: -10)
-                moviment(goal: goalYellow, valor: -40)
-                moviment(goal: goalPurple, valor: 30)
+                goalPurpleDecreasing = false
+                goalYellowFastDecrease = true
+                goalBlueFastDecrease = true
             }
             if colorNumberBall == "2"{
-                moviment(goal: goalBlue, valor: -40)
-                moviment(goal: goalYellow, valor: 30)
-                moviment(goal: goalPurple, valor: -40)
+                goalYellowDecreasing = false
+                goalBlueFastDecrease = true
+                goalPurpleFastDecrease = true
             }
         } else {
             ball.position = CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300))
@@ -315,20 +270,99 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
 
     }
     
-    func moviment (goal: SKSpriteNode, valor: CGFloat){
-        goal.size = CGSize(width: 210, height: goal.size.height + valor)
-    }
 
     func destroy(ball: SKNode) {
         ball.removeFromParent()
     }
 
     override public func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        if lastTime == 0 {
+            lastTime = currentTime
+            return
+        }
+        let deltaTime = currentTime - lastTime
+        lastTime = currentTime
+        let decrease = speedGoal * CGFloat(deltaTime)
+        let increase = speedIncrease * CGFloat(deltaTime)
+        let decreaseFast = speedDecreaseFast * CGFloat(deltaTime)
+        
+        if goalPurpleFastDecrease {
+            goalDecrease(decrease: decreaseFast, goal: goalPurple)
+            timePurple += deltaTime
+            if timePurple >= 0.3 {
+                goalPurpleFastDecrease = false
+                timePurple = 0
+            }
+        } else if goalPurpleDecreasing {
+            goalDecrease(decrease: decrease, goal: goalPurple)
+        } else {
+            goalIncrease(increase: increase, goal: goalPurple)
+            timePurple += deltaTime
+            if timePurple >= 0.3 {
+                goalPurpleDecreasing = true
+                timePurple = 0
+            }
+        }
+        
+        if goalBlueFastDecrease {
+            goalDecrease(decrease: decreaseFast, goal: goalBlue)
+            timeBlue += deltaTime
+            if timeBlue >= 0.3 {
+                goalBlueFastDecrease = false
+                timeBlue = 0
+            }
+        } else if goalBlueDecreasing {
+            goalDecrease(decrease: decrease, goal: goalBlue)
+        } else {
+            goalIncrease(increase: increase, goal: goalBlue)
+            timeBlue += deltaTime
+            if timeBlue >= 0.3 {
+                goalBlueDecreasing = true
+                timeBlue = 0
+            }
+        }
+        
+        if goalYellowFastDecrease {
+            goalDecrease(decrease: decreaseFast, goal: goalYellow)
+            timeYellow += deltaTime
+            if timeYellow >= 0.3 {
+                goalYellowFastDecrease = false
+                timeYellow = 0
+            }
+        } else if goalYellowDecreasing {
+            goalDecrease(decrease: decrease, goal: goalYellow)
+        } else {
+            goalIncrease(increase: increase, goal: goalYellow)
+            timeYellow += deltaTime
+            if timeYellow >= 0.3 {
+                goalYellowDecreasing = true
+                timeYellow = 0
+            }
+        }
     }
     
     public func didBegin(_ contact: SKPhysicsContact) {
 
+    }
+    
+    func goalIncrease(increase: CGFloat, goal: SKSpriteNode){
+        let height = goal.size.height + increase
+        goal.size = CGSize(width: 210, height: height)
+    }
+    
+    func goalDecrease(decrease: CGFloat, goal: SKSpriteNode){
+        var height = goal.size.height - decrease
+        if height <= 0 {
+            height = 0
+            gameOver()
+        }
+        goal.size = CGSize(width: 210, height: height)
+    }
+    
+    func gameOver(){
+        let gameOverScene = GameOverScene(fileNamed: "GameOverScene")!
+        gameOverScene.scaleMode = .aspectFit
+        self.view?.presentScene(gameOverScene)
     }
 }
 
