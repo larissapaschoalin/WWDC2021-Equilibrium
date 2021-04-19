@@ -5,11 +5,11 @@
  
  Press **start** and challenge yourself to find the equilibrium in an environment that is not always easy or fair (that reminds you of something, right?)
 
- To do this, drag the balls into the tanks of their respective colors **for 1 minute**.
+ To do this, drag the balls into the tanks of their respective colors balancing the heights **for 1 minute**.
  
   ---
   
-  - Note: For better experience use this Playground in full screen.
+  - Note: For better experience use this Playground in vertical full screen.
   
   */
 
