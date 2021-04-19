@@ -24,8 +24,11 @@
 		5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2F97E2054B6E400191409 /* ManifestPlist.strings */; };
 		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
-		901A181E262BAB5400870A52 /* preview.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 901A181D262BAB5400870A52 /* preview.jpg */; };
+		901FC27F262CE1B000F40739 /* preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 901FC27E262CE1B000F40739 /* preview.png */; };
 		90306B6E26292F0100E27634 /* InitialScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 90306B6D26292F0100E27634 /* InitialScene.sks */; };
+		90540CBA262CC8FE00A7275F /* botao.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 90540CB7262CC8FE00A7275F /* botao.mp3 */; };
+		9061F058262CF236004264E6 /* erro.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9061F057262CF236004264E6 /* erro.mp3 */; };
+		9061F060262CF411004264E6 /* acerto.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9061F05F262CF411004264E6 /* acerto.mp3 */; };
 		9068B5A32629FDD500969320 /* WinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068B5A22629FDD500969320 /* WinScene.swift */; };
 		9068B5A82629FE1000969320 /* WinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9068B5A72629FE1000969320 /* WinScene.sks */; };
 		9068B5BC262A06EE00969320 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068B5BB262A06EE00969320 /* GameOverScene.swift */; };
@@ -152,8 +155,11 @@
 		5EF2F9AB2054BBF300191409 /* libBookCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBookCore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
-		901A181D262BAB5400870A52 /* preview.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = preview.jpg; sourceTree = "<group>"; };
+		901FC27E262CE1B000F40739 /* preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preview.png; sourceTree = "<group>"; };
 		90306B6D26292F0100E27634 /* InitialScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InitialScene.sks; sourceTree = "<group>"; };
+		90540CB7262CC8FE00A7275F /* botao.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = botao.mp3; sourceTree = "<group>"; };
+		9061F057262CF236004264E6 /* erro.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = erro.mp3; sourceTree = "<group>"; };
+		9061F05F262CF411004264E6 /* acerto.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = acerto.mp3; path = ../../../../../../../Documents/Academy/acerto.mp3; sourceTree = "<group>"; };
 		9068B5A22629FDD500969320 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
 		9068B5A72629FE1000969320 /* WinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WinScene.sks; sourceTree = "<group>"; };
 		9068B5BB262A06EE00969320 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
@@ -345,7 +351,8 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
-				901A181D262BAB5400870A52 /* preview.jpg */,
+				901FC27E262CE1B000F40739 /* preview.png */,
+				90540CB0262CBD9300A7275F /* Sounds */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
 				447A265A2600305100C533BC /* GameScene.sks */,
 				90306B6D26292F0100E27634 /* InitialScene.sks */,
@@ -363,6 +370,16 @@
 				5E70679E23678DC00094BDEF /* Modules */,
 			);
 			name = "Supporting Content";
+			sourceTree = "<group>";
+		};
+		90540CB0262CBD9300A7275F /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9061F05F262CF411004264E6 /* acerto.mp3 */,
+				9061F057262CF236004264E6 /* erro.mp3 */,
+				90540CB7262CC8FE00A7275F /* botao.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -494,11 +511,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9061F060262CF411004264E6 /* acerto.mp3 in Resources */,
 				9068B5C1262A079D00969320 /* GameOverScene.sks in Resources */,
 				447A265B2600305100C533BC /* GameScene.sks in Resources */,
+				9061F058262CF236004264E6 /* erro.mp3 in Resources */,
+				901FC27F262CE1B000F40739 /* preview.png in Resources */,
+				90540CBA262CC8FE00A7275F /* botao.mp3 in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
-				901A181E262BAB5400870A52 /* preview.jpg in Resources */,
 				9068B5A82629FE1000969320 /* WinScene.sks in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 				90306B6E26292F0100E27634 /* InitialScene.sks in Resources */,

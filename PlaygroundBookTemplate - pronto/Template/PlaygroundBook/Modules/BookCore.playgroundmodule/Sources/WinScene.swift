@@ -5,26 +5,12 @@ import AVFoundation
 public class WinScene: SKScene {
     lazy var winScene = childNode(withName: "winScene") as? SKSpriteNode
     var playAgainButtom = SKSpriteNode(imageNamed: "yellowButtom")
-    
-    public func playMusicButtom() {
-    var audioPlayer: AVAudioPlayer?
-    if let audioURL = Bundle.main.url(forResource: "botao", withExtension: "m4a") {
-        do {
-            try audioPlayer = AVAudioPlayer(contentsOf: audioURL) /// make the audio player
-            audioPlayer?.numberOfLoops = 0
-            
-        } catch {
-            print("Couldn't play audio. Error: (error)")
-        }
-        
-    } else {
-        print("No audio file found")
-    }
-}
+    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+
 
     
     override public func didMove(to view: SKView) {
-        
+        playButtonSound()
         winScene?.alpha = 0
         playAgainButtom.alpha = 0
         let fadeIn = SKAction.fadeIn(withDuration: 0.5)
@@ -37,12 +23,25 @@ public class WinScene: SKScene {
         addChild(playAgainButtom)
     }
     
+    func playButtonSound() {
+        do {
+            guard let path = Bundle.main.path(forResource: "botao", ofType: "mp3") else { return }
+            let url = URL(fileURLWithPath: path)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.prepareToPlay()
+            audioPlayer.volume = 0.3
+            
+        } catch {
+            return
+        }
+    }
+    
     func touchDown(atPoint pos : CGPoint) {
         if playAgainButtom.contains(pos){
+            audioPlayer.play()
             let scene = GameScene(fileNamed: "GameScene")!
             scene.scaleMode = .aspectFit
             self.view?.presentScene(scene)
-            playMusicButtom() 
         }
     }
 

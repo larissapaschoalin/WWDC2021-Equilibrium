@@ -1,4 +1,5 @@
 import SpriteKit
+import AVFoundation
 
 public class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -16,9 +17,9 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeBar: SKSpriteNode!
     var teste: CGFloat = 0
     var lastTime: TimeInterval = 0
-    var speedGoal: CGFloat = 10
-    var speedIncrease: CGFloat = 150
-    var speedDecreaseFast: CGFloat = 250
+    var speedGoal: CGFloat = 12
+    var speedIncrease: CGFloat = 200
+    var speedDecreaseFast: CGFloat = 40
     var goalBlueDecreasing = true
     var goalYellowDecreasing = true
     var goalPurpleDecreasing = true
@@ -28,6 +29,21 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     var goalBlueFastDecrease = false
     var goalYellowFastDecrease = false
     var goalPurpleFastDecrease = false
+    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
+    
+    func playSound(nameSound: String) {
+        do {
+            guard let path = Bundle.main.path(forResource: nameSound, ofType: "mp3") else { return }
+            let url = URL(fileURLWithPath: path)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+            audioPlayer.volume = 0.3
+            
+        } catch {
+            return
+        }
+    }
 
 
     public override func sceneDidLoad() {
@@ -59,7 +75,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         ball.physicsBody?.collisionBitMask = 2
         ball.physicsBody?.mass = 2
         ball.physicsBody?.contactTestBitMask = ball.physicsBody!.collisionBitMask
-        ball.physicsBody?.applyImpulse(.init(dx: 1000, dy: 1000))
+        ball.physicsBody?.applyImpulse(.init(dx: 900, dy: 900))
     
     }
     
@@ -76,7 +92,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     
         
         let xRed = UIColor(red: 231/255, green: 95/255, blue: 93/255, alpha: 1.0)
-        timeBar = SKSpriteNode(color: xRed, size: .init(width: self.size.width, height: 30))
+        timeBar = SKSpriteNode(color: xRed, size: .init(width: self.size.width, height: 50))
         timeBar.position = CGPoint(x: self.size.width / -2, y: self.size.height / 2)
         timeBar.anchorPoint = .init(x: 0, y: 0.5)
         timeBar.zPosition = 2
@@ -89,8 +105,8 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
 
-        goalBlue = SKSpriteNode(color: colors[0], size: .init(width: 210, height: 365))
-        goalBlue.position = CGPoint(x: -210, y:-85)
+        goalBlue = SKSpriteNode(color: colors[0], size: .init(width: 210, height: 372))
+        goalBlue.position = CGPoint(x: -210, y:-78)
         goalBlue.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointBlue = CGPoint(x: goalBlue.size.width / 2 - (goalBlue.size.width * goalBlue.anchorPoint.x), y:goalBlue.size.height / 2 - (goalBlue.size.height * goalBlue.anchorPoint.y))
         goalBlue.physicsBody = SKPhysicsBody(rectangleOf: goalBlue.size, center: centerPointBlue)
@@ -100,8 +116,8 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(goalBlue)
         
 
-        goalPurple = SKSpriteNode(color: colors[1], size: .init(width: 210, height: 365))
-        goalPurple.position = CGPoint(x: 0, y:-85)
+        goalPurple = SKSpriteNode(color: colors[1], size: .init(width: 210, height: 372))
+        goalPurple.position = CGPoint(x: 0, y:-78)
         goalPurple.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointPurple = CGPoint(x: goalPurple.size.width / 2 - (goalPurple.size.width * goalPurple.anchorPoint.x), y:goalPurple.size.height / 2 - (goalPurple.size.height * goalPurple.anchorPoint.y))
         goalPurple.physicsBody = SKPhysicsBody(rectangleOf: goalPurple.size, center: centerPointPurple)
@@ -113,8 +129,8 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(goalPurple)
         
         
-        goalYellow = SKSpriteNode(color: colors[2], size: .init(width: 210, height: 365))
-        goalYellow.position = CGPoint(x: 210, y:-85)
+        goalYellow = SKSpriteNode(color: colors[2], size: .init(width: 210, height: 372))
+        goalYellow.position = CGPoint(x: 210, y:-78)
         goalYellow.anchorPoint = .init(x: 0.5, y: 1)
         let centerPointYellow = CGPoint(x: goalYellow.size.width / 2 - (goalYellow.size.width * goalYellow.anchorPoint.x), y:goalYellow.size.height / 2 - (goalYellow.size.height * goalYellow.anchorPoint.y))
         goalYellow.physicsBody = SKPhysicsBody(rectangleOf: goalYellow.size, center: centerPointYellow)
@@ -166,7 +182,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
         let ceiling = SKNode()
-                 let ceilingBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width+100, height: 45))
+                 let ceilingBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width+100, height: 65))
                      ceiling.position = CGPoint(x: 0, y: self.size.height / 2)
                      ceiling.setScale(2)
                      ceiling.name = "ceiling"
@@ -250,21 +266,25 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
                 balls.remove(at: index)
             }
             if colorNumberBall == "0"{
+                playSound(nameSound: "acerto")
                 goalBlueDecreasing = false
                 goalYellowFastDecrease = true
                 goalPurpleFastDecrease = true
             }
             if colorNumberBall == "1"{
+                playSound(nameSound: "acerto")
                 goalPurpleDecreasing = false
                 goalYellowFastDecrease = true
                 goalBlueFastDecrease = true
             }
             if colorNumberBall == "2"{
+                playSound(nameSound: "acerto")
                 goalYellowDecreasing = false
                 goalBlueFastDecrease = true
                 goalPurpleFastDecrease = true
             }
         } else {
+            playSound(nameSound: "erro")
             ball.position = CGPoint(x: .random(in: -300...300) , y: .random(in: -1...300))
         }
 

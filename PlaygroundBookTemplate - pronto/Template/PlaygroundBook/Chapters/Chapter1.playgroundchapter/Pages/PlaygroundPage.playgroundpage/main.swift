@@ -23,26 +23,6 @@ import AVFoundation
 
 let sceneView = SKView(frame: CGRect(x: 0, y: 0, width: 630, height: 886))
 
-//private func playMusic() {
-//
-//        do {
-//            music = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath:
-//                Bundle.main.path(forResource: "calm", ofType: "mp3")!))
-//            music.prepareToPlay()
-//            music.numberOfLoops = -1
-//            let audioSession = AVAudioSession.sharedInstance()
-//            do {
-//                try audioSession.setCategory(AVAudioSession.Category.playback)
-//            }
-//            catch {
-//            }
-//        }
-//        catch {
-//            print("Error: could not play theme song")
-//        }
-//        music.play()
-//    }
-
 
 if let scene = InitialScene(fileNamed: "InitialScene") {
     scene.scaleMode = .aspectFit
