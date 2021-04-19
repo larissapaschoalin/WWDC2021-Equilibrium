@@ -1,14 +1,15 @@
 /*:
- # WELCOME TO EQUILIBRIUM
+ ![Welcome to Equilibrium](welcome2.png)
+  
  ## The game of life
-  
- Aperte **start** e se desafie a encontrar o equilibrio em um ambiente nem sempre fácil ou justo (isso lembra alguma coisa, ne?)
+ 
+ Press **start** and challenge yourself to find the equilibrium in an environment that is not always easy or fair (that reminds you of something, right?)
 
- Para isso tente arrastar as bolinhas para os tanques de suas respectivas cores **por 1 minuto**.
-  
+ To do this, drag the balls into the tanks of their respective colors **for 1 minute**.
+ 
   ---
   
-  - Note: Para uma melhor experiência deixe o jogo em tela cheia
+  - Note: For better experience use this Playground in full screen.
   
   */
 

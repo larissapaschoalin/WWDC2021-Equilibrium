@@ -12,7 +12,7 @@ public class InitialScene: SKScene {
         startButtom.position = CGPoint(x: -0.361, y: -216.162)
         startButtom.size = CGSize(width: 268.094, height: 100.468)
         addChild(startButtom)
-        playButtonSound()
+        
     }
     
     func playButtonSound() {
@@ -21,7 +21,7 @@ public class InitialScene: SKScene {
             let url = URL(fileURLWithPath: path)
             audioPlayer = try AVAudioPlayer(contentsOf: url)
             audioPlayer.prepareToPlay()
-            audioPlayer.volume = 0.3
+            audioPlayer.volume = 0.5
             
         } catch {
             return
@@ -30,7 +30,7 @@ public class InitialScene: SKScene {
     
     func touchDown(atPoint pos : CGPoint) {
         if startButtom.contains(pos){
-            audioPlayer.play()
+            GameController.playButtonSound()
             let scene = GameScene(fileNamed: "GameScene")!
             scene.scaleMode = .aspectFit
             self.view?.presentScene(scene)

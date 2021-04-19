@@ -33,6 +33,9 @@
 		9068B5A82629FE1000969320 /* WinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9068B5A72629FE1000969320 /* WinScene.sks */; };
 		9068B5BC262A06EE00969320 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9068B5BB262A06EE00969320 /* GameOverScene.swift */; };
 		9068B5C1262A079D00969320 /* GameOverScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9068B5C0262A079D00969320 /* GameOverScene.sks */; };
+		90A0309E262D16F7005F4CCE /* GameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A0309D262D16F7005F4CCE /* GameController.swift */; };
+		90A030A9262D2454005F4CCE /* MyHint.txt in Resources */ = {isa = PBXBuildFile; fileRef = 90A030A8262D2454005F4CCE /* MyHint.txt */; };
+		90A030CD262D2F49005F4CCE /* welcome2.png in Resources */ = {isa = PBXBuildFile; fileRef = 90A030CC262D2F49005F4CCE /* welcome2.png */; };
 		90F2E630262A0E4A00FE43A5 /* InitialScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F2E62F262A0E4A00FE43A5 /* InitialScene.swift */; };
 /* End PBXBuildFile section */
 
@@ -129,7 +132,7 @@
 /* Begin PBXFileReference section */
 		447A265A2600305100C533BC /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		447A2677260036B500C533BC /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeuPlaygroundLegal.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E086DC02051C5A7004D8D25 /* Equilibrium.playgroundbook */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Equilibrium.playgroundbook; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E086DC72051DD03004D8D25 /* BookOverridingBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BookOverridingBuildSettings.xcconfig; sourceTree = "<group>"; };
 		5E086DCD2051DDB8004D8D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveView.storyboard; sourceTree = "<group>"; };
 		5E086DCF2051DF0F004D8D25 /* Manifest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Manifest.plist; sourceTree = "<group>"; };
@@ -164,6 +167,9 @@
 		9068B5A72629FE1000969320 /* WinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WinScene.sks; sourceTree = "<group>"; };
 		9068B5BB262A06EE00969320 /* GameOverScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
 		9068B5C0262A079D00969320 /* GameOverScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOverScene.sks; sourceTree = "<group>"; };
+		90A0309D262D16F7005F4CCE /* GameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameController.swift; sourceTree = "<group>"; };
+		90A030A8262D2454005F4CCE /* MyHint.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = MyHint.txt; sourceTree = "<group>"; };
+		90A030CC262D2F49005F4CCE /* welcome2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome2.png; sourceTree = "<group>"; };
 		90F2E62F262A0E4A00FE43A5 /* InitialScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,7 +202,7 @@
 		5E086DA4204F706E004D8D25 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */,
+				5E086DC02051C5A7004D8D25 /* Equilibrium.playgroundbook */,
 				5EF2F9AB2054BBF300191409 /* libBookCore.a */,
 				5E6F7E612368FB6A008CC191 /* libBookAPI.a */,
 				5EA2E3BD2056F35A00416A35 /* LiveViewTestApp.app */,
@@ -307,6 +313,7 @@
 				9068B5A22629FDD500969320 /* WinScene.swift */,
 				9068B5BB262A06EE00969320 /* GameOverScene.swift */,
 				90F2E62F262A0E4A00FE43A5 /* InitialScene.swift */,
+				90A0309D262D16F7005F4CCE /* GameController.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -351,6 +358,7 @@
 		5EF2F9792054B64800191409 /* PrivateResources */ = {
 			isa = PBXGroup;
 			children = (
+				90A030CC262D2F49005F4CCE /* welcome2.png */,
 				901FC27E262CE1B000F40739 /* preview.png */,
 				90540CB0262CBD9300A7275F /* Sounds */,
 				5EF2F97E2054B6E400191409 /* ManifestPlist.strings */,
@@ -360,6 +368,7 @@
 				5E551EC42371FC3F00784365 /* Assets.xcassets */,
 				9068B5A72629FE1000969320 /* WinScene.sks */,
 				9068B5C0262A079D00969320 /* GameOverScene.sks */,
+				90A030A8262D2454005F4CCE /* MyHint.txt */,
 			);
 			path = PrivateResources;
 			sourceTree = "<group>";
@@ -402,7 +411,7 @@
 			);
 			name = PlaygroundBook;
 			productName = PlaygroundBook;
-			productReference = 5E086DC02051C5A7004D8D25 /* MeuPlaygroundLegal.playgroundbook */;
+			productReference = 5E086DC02051C5A7004D8D25 /* Equilibrium.playgroundbook */;
 			productType = "com.apple.product-type.bundle";
 		};
 		5E6F7E602368FB6A008CC191 /* BookAPI */ = {
@@ -513,9 +522,11 @@
 			files = (
 				9061F060262CF411004264E6 /* acerto.mp3 in Resources */,
 				9068B5C1262A079D00969320 /* GameOverScene.sks in Resources */,
+				90A030CD262D2F49005F4CCE /* welcome2.png in Resources */,
 				447A265B2600305100C533BC /* GameScene.sks in Resources */,
 				9061F058262CF236004264E6 /* erro.mp3 in Resources */,
 				901FC27F262CE1B000F40739 /* preview.png in Resources */,
+				90A030A9262D2454005F4CCE /* MyHint.txt in Resources */,
 				90540CBA262CC8FE00A7275F /* botao.mp3 in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				5E551EC52371FC3F00784365 /* Assets.xcassets in Resources */,
@@ -598,6 +609,7 @@
 				90F2E630262A0E4A00FE43A5 /* InitialScene.swift in Sources */,
 				9068B5BC262A06EE00969320 /* GameOverScene.swift in Sources */,
 				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
+				90A0309E262D16F7005F4CCE /* GameController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

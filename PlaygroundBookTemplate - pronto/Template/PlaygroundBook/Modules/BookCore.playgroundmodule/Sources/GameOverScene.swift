@@ -1,18 +1,15 @@
 import Foundation
 import SpriteKit
-import AVFoundation
 import PlaygroundSupport
 
 
 public class GameOverScene: SKScene {
     lazy var gameOver = childNode(withName: "gameOver") as? SKSpriteNode
     var tryAgainButton = SKSpriteNode(imageNamed: "blueButtom")
-    var audioPlayer: AVAudioPlayer = AVAudioPlayer()
     var correntCardIndex = 0
-    let messagens = [ "Dica: as vezes para conseguirmos equilibrar as coisas precisamos aceitar um ritmo mais lento"]
+    let messagens = ["**Hint**: sometimes, to balance things out, we need to slow down"]
     
     override public func didMove(to view: SKView) {
-        //playButtonSound()
         gameOver?.alpha = 0
         tryAgainButton.alpha = 0
         let fadeIn = SKAction.fadeIn(withDuration: 0.5)
@@ -28,26 +25,11 @@ public class GameOverScene: SKScene {
     func showMessage (index:Int){
             PlaygroundPage.current.assessmentStatus = .pass(message: messagens[index])
     }
-    
-    func playButtonSound() {
-        do {
-            guard let path = Bundle.main.path(forResource: "botao", ofType: "mp3") else { return }
-            let url = URL(fileURLWithPath: path)
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer.prepareToPlay()
-            audioPlayer.volume = 0.6
-            audioPlayer.play()
 
-            
-        } catch {
-            return
-        }
-    }
-    
     
     func touchDown(atPoint pos : CGPoint) {
         if tryAgainButton.contains(pos){
-            playButtonSound()
+            GameController.playButtonSound()
             let scene = GameScene(fileNamed: "GameScene")!
             scene.scaleMode = .aspectFit
             self.view?.presentScene(scene)

@@ -17,7 +17,7 @@ public class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeBar: SKSpriteNode!
     var teste: CGFloat = 0
     var lastTime: TimeInterval = 0
-    var speedGoal: CGFloat = 12
+    var speedGoal: CGFloat = 11
     var speedIncrease: CGFloat = 200
     var speedDecreaseFast: CGFloat = 40
     var goalBlueDecreasing = true
